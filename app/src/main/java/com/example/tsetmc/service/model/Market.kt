@@ -1,4 +1,4 @@
-package com.example.tsetmc
+package com.example.tsetmc.service.model
 
 data class Market (
     val symbol: String?,
