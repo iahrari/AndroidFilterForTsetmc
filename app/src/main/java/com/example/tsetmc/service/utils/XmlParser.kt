@@ -144,7 +144,7 @@ class XmlParser private constructor(private val dataFile: File){
         return result
     }
 
-    companion object{
+    companion object {
         fun parse(dataFilePath: File): List<Market>{
             return XmlParser(dataFilePath).readDocument()
         }
