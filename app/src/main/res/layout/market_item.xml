@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="market" type="com.example.tsetmc.service.model.Market" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:weightSum="4">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/symbol"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@{market.symbol}"
+                tools:text="ضماد" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/last_transaction_percent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@{String.valueOf(market.lastTransactionPercent)}"
+                tools:text="2.3%" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/eps"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@{String.valueOf(market.eps)}"
+                tools:text="3699" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/last_price_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@{String.valueOf(market.lastPriceValue)}"
+                tools:text="426322" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

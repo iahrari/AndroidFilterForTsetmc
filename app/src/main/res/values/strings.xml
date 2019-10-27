@@ -3,4 +3,8 @@
     <string name="filter_by_last_transaction_percent">Filter by Last Transaction Percent:</string>
     <string name="from">From</string>
     <string name="to">To:</string>
+    <string name="symbol">نماد</string>
+    <string name="last_transaction_percent">درصد آخرین معامله</string>
+    <string name="eps">EPS</string>
+    <string name="last_price_value">آخرین قیمت</string>
 </resources>
