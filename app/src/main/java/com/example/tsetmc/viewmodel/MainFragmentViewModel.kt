@@ -1,7 +1,6 @@
 package com.example.tsetmc.viewmodel
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,8 +13,7 @@ import java.lang.IllegalArgumentException
 
 class MainFragmentViewModel(private val context: Context): BaseViewModel() {
     private val _itemsLiveData: MutableLiveData<List<Market>> = MutableLiveData()
-    val itemsLiveData: LiveData<List<Market>>
-        get() = _itemsLiveData
+    val itemsLiveData: LiveData<List<Market>> get() = _itemsLiveData
 
     init {
         scope.launch {
@@ -23,8 +21,6 @@ class MainFragmentViewModel(private val context: Context): BaseViewModel() {
               _itemsLiveData.postValue(
                   repository.retrieveMarketDataList(context)
               )
-
-              Log.i("observer",_itemsLiveData.value?.size.toString())
           }
         }
     }
@@ -35,7 +31,7 @@ class MainFragmentViewModel(private val context: Context): BaseViewModel() {
             if (modelClass.isAssignableFrom(MainFragmentViewModel::class.java))
                 return MainFragmentViewModel(context) as T
 
-            throw IllegalArgumentException("Unable to cast ${modelClass.name} to ${MainFragmentViewModel::class.simpleName}")
+            throw IllegalArgumentException("Unable to cast ${modelClass.name} to ${MainFragmentViewModel::class}")
         }
 
     }

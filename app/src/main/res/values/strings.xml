@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Tsetmc</string>
+    <string name="app_name">دیده بان بازار</string>
     <string name="filter_by_last_transaction_percent">Filter by Last Transaction Percent:</string>
     <string name="from">از:</string>
     <string name="to">تا:</string>

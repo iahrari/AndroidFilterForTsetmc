@@ -37,11 +37,12 @@ class MainActivity : AppCompatActivity() {
 
 
 
-//    private fun sortList(){
-//        list.sortWith(Comparator { o1, o2 ->
-//            ((o1.lastTransactionPercent!! - o2.lastTransactionPercent!!) * 1000.0).toInt()
-//        })
-//    }
+    private fun sortList(){
+        val list = arrayListOf<Market>()
+        list.sortWith(Comparator { o1, o2 ->
+            ((o1.lastTransactionPercent!! - o2.lastTransactionPercent!!) * 1000.0).toInt()
+        })
+    }
 
 //    private fun filterList(from: Float, to: Float): List<Market>{
 //        return list.filter {

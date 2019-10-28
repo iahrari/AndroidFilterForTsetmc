@@ -30,5 +30,4 @@ data class Market (
     override fun toString(): String {
         return "نماد: ${symbol}، آخرین معامله درصد: $lastTransactionPercent\n"
     }
-
 }
