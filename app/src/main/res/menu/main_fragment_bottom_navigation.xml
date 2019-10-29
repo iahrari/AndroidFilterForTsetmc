@@ -6,6 +6,11 @@
         android:icon="@drawable/ic_filter"/>
 
     <item
+        android:id="@+id/history_menu"
+        android:title="@string/history"
+        android:icon="@drawable/ic_history"/>
+
+    <item
         android:id="@+id/sort_menu"
         android:title="@string/sort"
         android:icon="@drawable/ic_sort_black"/>

@@ -1,7 +1,6 @@
 package com.example.tsetmc.ui.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,11 +39,8 @@ class MainFragment : Fragment() {
     }
 
     private fun setFilterDoneByEditText(
-        i: Spinner,
-        from: EditText,
-        to: EditText,
-        dismiss: () -> Unit
-    ) {
+        i: Spinner, from: EditText,
+        to: EditText, dismiss: () -> Unit) {
         to.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 itemAdapter.filter(from.text.toString())
@@ -105,10 +101,15 @@ class MainFragment : Fragment() {
             when (it.itemId) {
                 R.id.filter_menu -> setFilterBottomSheet()
                 R.id.sort_menu -> setSortBottomSheet()
+                R.id.history_menu -> setHistoryBottomSheet()
             }
 
             true
         }
+    }
+
+    private fun setHistoryBottomSheet() {
+
     }
 
     private fun setRecyclerView() {
