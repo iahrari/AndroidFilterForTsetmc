@@ -316,7 +316,7 @@ public class JalaliCalendar extends Calendar {
 
     }
 
-    public static boolean isLeepYear(int year) {
+    public static boolean isLeapYear(int year) {
         //Algorithm from www.wikipedia.com
         if ((year % 33 == 1 || year % 33 == 5 || year % 33 == 9 || year % 33 == 13 ||
                 year % 33 == 17 || year % 33 == 22 || year % 33 == 26 || year % 33 == 30)) {
@@ -539,7 +539,7 @@ public class JalaliCalendar extends Calendar {
             super.set(MONTH, amount % 12);
             if (get(DAY_OF_MONTH) > jalaliDaysInMonth[amount % 12]) {
                 super.set(DAY_OF_MONTH, jalaliDaysInMonth[amount % 12]);
-                if (get(MONTH) == 11 && isLeepYear(get(YEAR))) {
+                if (get(MONTH) == 11 && isLeapYear(get(YEAR))) {
                     super.set(DAY_OF_MONTH, 30);
                 }
             }
@@ -548,7 +548,7 @@ public class JalaliCalendar extends Calendar {
         } else if (field == YEAR) {
 
             super.set(YEAR, get(YEAR) + amount);
-            if (get(DAY_OF_MONTH) == 30 && get(MONTH) == 11 && !isLeepYear(get(YEAR))) {
+            if (get(DAY_OF_MONTH) == 30 && get(MONTH) == 11 && !isLeapYear(get(YEAR))) {
                 super.set(DAY_OF_MONTH, 29);
             }
 
@@ -605,7 +605,7 @@ public class JalaliCalendar extends Calendar {
             }
             case YEAR: {
                 super.set(YEAR, internalGet(YEAR) + amount);
-                if (internalGet(MONTH) == 11 && internalGet(DAY_OF_MONTH) == 30 && !isLeepYear(internalGet(YEAR))) {
+                if (internalGet(MONTH) == 11 && internalGet(DAY_OF_MONTH) == 30 && !isLeapYear(internalGet(YEAR))) {
                     super.set(DAY_OF_MONTH, 29);
                 }
                 break;
@@ -673,7 +673,7 @@ public class JalaliCalendar extends Calendar {
                 super.set(MONTH, mon);
 
                 int monthLen = jalaliDaysInMonth[mon];
-                if (internalGet(MONTH) == 11 && isLeepYear(internalGet(YEAR))) {
+                if (internalGet(MONTH) == 11 && isLeapYear(internalGet(YEAR))) {
                     monthLen = 30;
                 }
                 if (internalGet(DAY_OF_MONTH) > monthLen) {
@@ -690,7 +690,7 @@ public class JalaliCalendar extends Calendar {
                     unit = 30;
                 }
                 if (get(MONTH) == 11) {
-                    if (isLeepYear(get(YEAR))) {
+                    if (isLeapYear(get(YEAR))) {
                         unit = 30;
                     } else {
                         unit = 29;
@@ -708,7 +708,7 @@ public class JalaliCalendar extends Calendar {
                 break;
             }
             case DAY_OF_YEAR: {
-                int unit = (isLeepYear(internalGet(YEAR)) ? 366 : 365);
+                int unit = (isLeapYear(internalGet(YEAR)) ? 366 : 365);
                 int dayOfYear = (internalGet(DAY_OF_YEAR) + amount) % unit;
                 dayOfYear = (dayOfYear > 0) ? dayOfYear : dayOfYear + unit;
                 int month = 0, temp = 0;

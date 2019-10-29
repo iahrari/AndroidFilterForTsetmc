@@ -21,13 +21,9 @@ class ExampleUnitTest {
         val month = calendar.get(JalaliCalendar.MONTH)
         val day = calendar.get(JalaliCalendar.DAY_OF_MONTH)
 
-        val convert = JalaliCalendar()
-        convert.time = calendar.time
-        val hour = convert.get(JalaliCalendar.YEAR)
-        val minute = convert.get(JalaliCalendar.MONTH)
-        val second = convert.get(JalaliCalendar.DAY_OF_MONTH)
-        val date = "$year/${month}/$day"
+        val convert =
+        JalaliCalendar(year, month, day, 1, 0, 0)
 
-        assertEquals(Date().time, JalaliCalendar().time.time)
+        assertNotEquals(Date().time, convert.time.time)
     }
 }
