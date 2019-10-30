@@ -1,10 +1,8 @@
 package com.example.tsetmc.service.utils
 
-import android.util.Log
 import java.io.*
 import java.net.HttpURLConnection
 import java.net.URL
-import java.util.*
 import java.util.zip.ZipInputStream
 
 class FileUtil private constructor(private val url: String, private val destinationDir: String) {
@@ -44,13 +42,12 @@ class FileUtil private constructor(private val url: String, private val destinat
         val fis = FileInputStream(zipFile)
         val buffer = ByteArray(1024)
         val zip = ZipInputStream(fis)
-        val downloadTime = generateDynamicFolderName()
         var ze = zip.nextEntry
 
 
         while (ze != null) {
             if (ze.name == "xl/worksheets/sheet.xml") {
-                val newFile = File(destinationDir +"/" +downloadTime+ "/" + File.separator + ze.name)
+                val newFile = File(destinationDir + "/" + File.separator + ze.name)
                 File(newFile.parent).mkdirs()
                 val fos = FileOutputStream(newFile)
                 var len = zip.read(buffer)
@@ -69,12 +66,18 @@ class FileUtil private constructor(private val url: String, private val destinat
         zip.close()
         fis.close()
 
-        return File("$destinationDir/${downloadTime}/xl/worksheets/sheet.xml")
+        return File("$destinationDir/xl/worksheets/sheet.xml")
     }
 
     companion object {
         fun parse(url: String, destinationDir: String): File{
             return FileUtil(url, destinationDir).downloadFile()
+        }
+
+        fun getListOfSubDirectory(directory: File): Array<String> {
+            return directory.list { dir, name ->
+                File(dir, name).isDirectory
+            }
         }
     }
 }

@@ -17,6 +17,7 @@ class StringUtil {
                 .replace("9", "۹")
                 .replace(".", ".")
                 .replace("-", "-")
+                .replace("/", "/")
         }
 
         @JvmStatic

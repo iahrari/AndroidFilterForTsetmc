@@ -1,8 +1,7 @@
 package com.example.tsetmc.service.model
 
 import android.view.View
-import androidx.recyclerview.widget.RecyclerView
-import com.example.tsetmc.ui.adapter.MainListViewHolder
+import com.example.tsetmc.ui.adapter.viewholder.MainListViewHolder
 import com.mikepenz.fastadapter.items.AbstractItem
 
 data class Market (
@@ -24,7 +23,8 @@ data class Market (
     override val type: Int
         get() = MainListViewHolder.id
 
-    override fun getViewHolder(v: View): MainListViewHolder = MainListViewHolder(v)
+    override fun getViewHolder(v: View): MainListViewHolder =
+        MainListViewHolder(v)
 
 
     override fun toString(): String {

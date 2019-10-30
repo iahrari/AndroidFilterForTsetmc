@@ -1,4 +1,4 @@
-package com.example.tsetmc.ui.adapter
+package com.example.tsetmc.ui.adapter.viewholder
 
 import android.view.View
 import androidx.databinding.DataBindingUtil

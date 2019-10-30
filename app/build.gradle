@@ -43,6 +43,8 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.2'
 
     implementation "com.mikepenz:fastadapter:$fastAdapterVersion"
+    implementation "com.mikepenz:fastadapter-extensions-ui:$fastAdapterVersion"
+    implementation "com.mikepenz:fastadapter-extensions-utils:$fastAdapterVersion"
 
     implementation "androidx.lifecycle:lifecycle-extensions:$androidx_version"
     kapt "androidx.lifecycle:lifecycle-compiler:$androidx_version"

@@ -7,28 +7,31 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.tsetmc.R
 import com.example.tsetmc.databinding.FilterDialogBinding
+import com.example.tsetmc.databinding.HistoryDialogBinding
 import com.example.tsetmc.databinding.SortDialogBinding
+import com.example.tsetmc.service.model.HistoryItem
 import com.example.tsetmc.service.model.Market
 import com.example.tsetmc.ui.*
+import com.example.tsetmc.ui.adapter.clickevent.HistoryClickEvent
 import com.example.tsetmc.viewmodel.MainFragmentViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.mikepenz.fastadapter.FastAdapter
+import com.mikepenz.fastadapter.IAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.utils.ComparableItemListImpl
 import kotlinx.android.synthetic.main.content_fragment_main.*
 
 class MainFragment : Fragment() {
-    private val comparator: MarketComparator = MarketComparator(0)
     private lateinit var viewModel: MainFragmentViewModel
     private lateinit var itemAdapter: ItemAdapter<Market>
     private lateinit var fastAdapter: FastAdapter<Market>
-    private lateinit var itemListImpl: ComparableItemListImpl<Market>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,40 +41,27 @@ class MainFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
-    private fun setFilterDoneByEditText(
-        i: Spinner, from: EditText,
-        to: EditText, dismiss: () -> Unit) {
-        to.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                itemAdapter.filter(from.text.toString())
-                itemAdapter.itemFilter.filterPredicate = { item, char ->
-                    if (char == "" || char == null || to.isThereAnyKindOfError())
-                        true
-                    else
-                        setAppropriateFilter(
-                            i.selectedItemPosition,
-                            char.toString(),
-                            to.text.toString(),
-                            item
-                        )
-                }
-                dismiss()
-                true
-            } else false
-        }
-    }
-
     private fun setFilterBottomSheet() {
         val dBinding: FilterDialogBinding =
             DataBindingUtil.inflate(layoutInflater, R.layout.filter_dialog, null, false)
         val dialog = BottomSheetDialog(context!!)
         dialog.setContentView(dBinding.root)
         setSpinner(dBinding.spinnerDialog)
-        setFilterDoneByEditText(
-            dBinding.spinnerDialog,
-            dBinding.fromEditText,
-            dBinding.toEditText
-        ) { dialog.dismiss() }
+
+        dBinding.apply {
+            toEditText.setOnEditorActionListener { _, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    viewModel.handleItemsFiltering(
+                        spinnerDialog.selectedItemPosition,
+                        fromEditText.text.toString(),
+                        toEditText.text.toString(),
+                        toEditText.isThereAnyKindOfError()
+                    )
+                    dialog.dismiss()
+                    true
+                } else false
+            }
+        }
         dialog.show()
     }
 
@@ -82,8 +72,7 @@ class MainFragment : Fragment() {
         dialog.setContentView(dBinding.root)
         setSpinner(dBinding.spinnerDialog)
         dBinding.submitSorting.setOnClickListener {
-            comparator.field = dBinding.spinnerDialog.selectedItemPosition
-            itemListImpl.withComparator(comparator)
+            viewModel.handleItemsSorting(dBinding.spinnerDialog.selectedItemPosition)
             dialog.dismiss()
         }
         dialog.show()
@@ -91,8 +80,8 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setRecyclerView()
         setViewModel()
+        setRecyclerView()
         setBottomNavigation()
     }
 
@@ -109,12 +98,26 @@ class MainFragment : Fragment() {
     }
 
     private fun setHistoryBottomSheet() {
+        val dBinding: HistoryDialogBinding =
+            DataBindingUtil.inflate(layoutInflater, R.layout.history_dialog, null, false)
+        val dialog = BottomSheetDialog(context!!)
+        dialog.setContentView(dBinding.root)
+        val hAdapter = FastAdapter.with(viewModel.historyItemAdapter)
+//        hAdapter.onClickListener = { v: View?, _: IAdapter<HistoryItem>, item: HistoryItem, _: Int ->
+//            v?.let {
+//                Toast.makeText(v.context, item.dateString, Toast.LENGTH_LONG).show()
+//            }
+//            false
+//        }
+//
+//        hAdapter.onPreClickListener = {_, _, _, _ -> true }
 
+        hAdapter.addEventHook(HistoryClickEvent(viewModel.historyItemAdapter) {viewModel.retrieveDataByTime(it)})
+        dBinding.recyclerHistory.adapter = hAdapter
+        dialog.show()
     }
 
     private fun setRecyclerView() {
-        itemListImpl = ComparableItemListImpl(comparator)
-        itemAdapter = ItemAdapter(itemListImpl)
         fastAdapter = FastAdapter.with(itemAdapter)
         recycler_main_list.adapter = fastAdapter
     }
@@ -124,8 +127,7 @@ class MainFragment : Fragment() {
             this,
             MainFragmentViewModel.Factory(context!!.applicationContext)
         ).get(MainFragmentViewModel::class.java)
-        viewModel.itemsLiveData.observe(this, Observer {
-            itemAdapter.add(it)
-        })
+
+        itemAdapter = viewModel.itemAdapter
     }
 }

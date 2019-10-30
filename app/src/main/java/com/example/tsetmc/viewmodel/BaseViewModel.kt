@@ -16,5 +16,8 @@ abstract class BaseViewModel: ViewModel() {
         job.cancel()
     }
 
-
+    interface ClickEvent{
+        fun actionIsSuccessful()
+        fun actionIsFailed()
+    }
 }

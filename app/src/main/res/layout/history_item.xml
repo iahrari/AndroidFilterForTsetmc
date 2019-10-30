@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <import type="com.example.tsetmc.service.utils.StringUtil"/>
+        <variable name="date" type="com.example.tsetmc.service.model.HistoryItem" />
+    </data>
+
+    <RadioButton
+        android:id="@+id/history_radio"
+        android:layout_width="match_parent"
+        android:layoutDirection="rtl"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@{StringUtil.convertEnglishNumberToPersian(date.dateString)}"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"/>
+</layout>

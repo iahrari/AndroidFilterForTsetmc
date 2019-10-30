@@ -1,28 +1,72 @@
 package com.example.tsetmc.viewmodel
-
 import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
+import com.example.tsetmc.service.externalDataDir
+import com.example.tsetmc.service.model.HistoryItem
 import com.example.tsetmc.service.model.Market
+import com.example.tsetmc.service.utils.generateDynamicFolderName
+import com.example.tsetmc.ui.MarketComparator
+import com.example.tsetmc.ui.setAppropriateFilter
+import com.mikepenz.fastadapter.adapters.ItemAdapter
+import com.mikepenz.fastadapter.utils.ComparableItemListImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.IllegalArgumentException
 
 class MainFragmentViewModel(private val context: Context): BaseViewModel() {
-    private val _itemsLiveData: MutableLiveData<List<Market>> = MutableLiveData()
-    val itemsLiveData: LiveData<List<Market>> get() = _itemsLiveData
+    private val _adapterUpdated = MutableLiveData<Boolean>()
+    private val comparator: MarketComparator = MarketComparator(0)
+    private val itemListImpl = ComparableItemListImpl(comparator)
+    val itemAdapter = ItemAdapter (itemListImpl)
+    val historyItemAdapter = ItemAdapter<HistoryItem>()
 
     init {
-        scope.launch {
-          withContext(Dispatchers.Default){
-              _itemsLiveData.postValue(
-                  repository.retrieveMarketDataList(context)
-              )
-          }
+        repository.historyItem.observeForever {
+            historyItemAdapter.adapterItems.removeAll { true }
+            historyItemAdapter.add(it)
         }
+        repository.modifyHistoryList(context.externalDataDir(""))
+        retrieveDataByTime(generateDynamicFolderName())
+    }
+
+    fun retrieveDataByTime(date: Long){
+        scope.launch {
+
+            val list = arrayListOf<Market>()
+            withContext(Dispatchers.Default) {
+                list.addAll(
+                    repository.retrieveMarketDataList(
+                        context.externalDataDir(
+                            "/$date"
+                        )
+                    )
+                )
+            }
+            itemAdapter.adapterItems.removeAll { true }
+            itemAdapter.add(list)
+            _adapterUpdated.postValue(true)
+        }
+    }
+
+    fun handleItemsFiltering(i: Int, from: String, to: String, isThereAnyKindOfError: Boolean){
+        itemAdapter.filter(from)
+        itemAdapter.itemFilter.filterPredicate = { item, char ->
+            if (char == "" || char == null || isThereAnyKindOfError)
+                true
+            else
+                setAppropriateFilter(
+                    i,
+                    char.toString(),
+                    to,
+                    item
+                )
+        }
+    }
+
+    fun handleItemsSorting(i: Int){
+        comparator.field = i
+        itemListImpl.withComparator(comparator)
     }
 
     class Factory(private val context: Context): ViewModelProvider.Factory{
