@@ -3,7 +3,7 @@ import android.content.Context
 import androidx.lifecycle.*
 import com.example.tsetmc.service.externalDataDir
 import com.example.tsetmc.service.model.HistoryItem
-import com.example.tsetmc.service.model.Market
+import com.example.tsetmc.ui.adapter.item.MarketItem
 import com.example.tsetmc.service.utils.generateDynamicFolderName
 import com.example.tsetmc.ui.MarketComparator
 import com.example.tsetmc.ui.setAppropriateFilter
@@ -15,11 +15,14 @@ import kotlinx.coroutines.withContext
 import java.lang.IllegalArgumentException
 
 class MainFragmentViewModel(private val context: Context): BaseViewModel() {
-    private val _adapterUpdated = MutableLiveData<Boolean>()
+    private val _isDataProcessed = MutableLiveData<Boolean>()
+    //private val _adapterUpdated = MutableLiveData<Boolean>()
     private val comparator: MarketComparator = MarketComparator(0)
     private val itemListImpl = ComparableItemListImpl(comparator)
     val itemAdapter = ItemAdapter (itemListImpl)
     val historyItemAdapter = ItemAdapter<HistoryItem>()
+
+    val isDataProcessed: LiveData<Boolean> get() = _isDataProcessed
 
     init {
         repository.historyItem.observeForever {
@@ -32,8 +35,8 @@ class MainFragmentViewModel(private val context: Context): BaseViewModel() {
 
     fun retrieveDataByTime(date: Long){
         scope.launch {
-
-            val list = arrayListOf<Market>()
+            _isDataProcessed.value = false
+            val list = arrayListOf<MarketItem>()
             withContext(Dispatchers.Default) {
                 list.addAll(
                     repository.retrieveMarketDataList(
@@ -45,7 +48,8 @@ class MainFragmentViewModel(private val context: Context): BaseViewModel() {
             }
             itemAdapter.adapterItems.removeAll { true }
             itemAdapter.add(list)
-            _adapterUpdated.postValue(true)
+            _isDataProcessed.value = true
+            //_adapterUpdated.postValue(true)
         }
     }
 
@@ -59,7 +63,7 @@ class MainFragmentViewModel(private val context: Context): BaseViewModel() {
                     i,
                     char.toString(),
                     to,
-                    item
+                    item.market
                 )
         }
     }

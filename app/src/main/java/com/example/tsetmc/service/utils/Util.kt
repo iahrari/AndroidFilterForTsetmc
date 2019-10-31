@@ -2,6 +2,8 @@ package com.example.tsetmc.service.utils
 
 import android.util.Log
 import com.example.tsetmc.service.model.HistoryItem
+import com.example.tsetmc.service.model.Market
+import com.example.tsetmc.ui.adapter.item.MarketItem
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -28,4 +30,13 @@ fun getLongArrayOfDataSubDirectoriesSorted(subDirectories: Array<String>): List<
 
     @Suppress("UNCHECKED_CAST")
     return longSubDirectories
+}
+
+fun prepareMarketItemList(list: List<Market>): List<MarketItem>{
+    val itemList = arrayListOf<MarketItem>()
+    list.forEach {
+        itemList.add(MarketItem(it))
+    }
+
+    return itemList
 }

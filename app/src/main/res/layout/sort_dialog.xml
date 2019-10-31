@@ -12,14 +12,14 @@
         android:layout_margin="16dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/bottom_sheet_filter"
+            android:id="@+id/bottom_sheet_sort"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layoutDirection="rtl"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/filter_title"
+                android:id="@+id/sort_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
@@ -30,13 +30,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Spinner
-                android:id="@+id/spinner_dialog"
+                android:id="@+id/spinner_sort_dialog"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
+                setSpinnerAdapter="@{true}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/filter_title"/>
+                app:layout_constraintTop_toBottomOf="@+id/sort_title"/>
 
             <com.google.android.material.button.MaterialButton
                 android:layout_width="match_parent"
@@ -44,7 +45,7 @@
                 android:id="@+id/submit_sorting"
                 android:layout_margin="16dp"
                 android:text="@string/submit"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_dialog"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_sort_dialog"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>

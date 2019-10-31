@@ -4,11 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.tsetmc.service.model.HistoryItem
-import com.example.tsetmc.service.model.Market
-import com.example.tsetmc.service.utils.FileUtil
-import com.example.tsetmc.service.utils.XmlParser
-import com.example.tsetmc.service.utils.generateDynamicFolderName
-import com.example.tsetmc.service.utils.getLongArrayOfDataSubDirectoriesSorted
+import com.example.tsetmc.service.utils.*
+import com.example.tsetmc.ui.adapter.item.MarketItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -34,8 +31,8 @@ class Repository {
         _historyItems.postValue(historyList)
     }
 
-    suspend fun retrieveMarketDataList(directory: File): MutableList<Market> {
-        val list: MutableList<Market> = ArrayList()
+    suspend fun retrieveMarketDataList(directory: File): MutableList<MarketItem> {
+        val list: MutableList<MarketItem> = ArrayList()
         var dataIsAvailable = false
         val dLong = generateDynamicFolderName()
         for(item in historyList)
@@ -56,7 +53,7 @@ class Repository {
                         )
                     else
                         File("$directory/xl/worksheets/sheet.xml")
-                list.addAll(XmlParser.parse(destinationDir))
+                list.addAll(prepareMarketItemList(XmlParser.parse(destinationDir)))
                 if (!dataIsAvailable) {
                     historyList.add(0, HistoryItem().apply {
                         dateLong = generateDynamicFolderName()

@@ -4,18 +4,18 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.example.tsetmc.R
 import com.example.tsetmc.databinding.MarketItemBinding
-import com.example.tsetmc.service.model.Market
+import com.example.tsetmc.ui.adapter.item.MarketItem
 import com.mikepenz.fastadapter.FastAdapter
 
-class MainListViewHolder(view: View): FastAdapter.ViewHolder<Market>(view) {
+class MainListViewHolder(view: View): FastAdapter.ViewHolder<MarketItem>(view) {
     private var binding: MarketItemBinding? = DataBindingUtil.bind(view)
 
-    override fun unbindView(item: Market) {
+    override fun unbindView(item: MarketItem) {
         binding?.market = null
     }
 
-    override fun bindView(item: Market, payloads: MutableList<Any>) {
-        binding?.market = item
+    override fun bindView(item: MarketItem, payloads: MutableList<Any>) {
+        binding?.market = item.market
     }
 
     companion object {

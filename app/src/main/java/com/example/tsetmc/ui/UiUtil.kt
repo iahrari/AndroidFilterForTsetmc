@@ -3,25 +3,7 @@ package com.example.tsetmc.ui
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import com.example.tsetmc.service.model.Market
-
-fun setSpinner(spinner: Spinner){
-    val array = arrayListOf(
-        "آخرین معامله - درصد",
-        "آخرین قیمت مقدار",
-        "آخرین قیمت درصد",
-        "EPS",
-        "P/E",
-        "خرید - تعداد",
-        "خرید - حجم",
-        "خرید - قیمت",
-        "فروش - قیمت",
-        "فروش - حجم",
-        "فروش - تعداد"
-    )
-
-    val adapter = ArrayAdapter<String>(spinner.context!!, android.R.layout.simple_spinner_dropdown_item, array)
-    spinner.adapter = adapter
-}
+import com.example.tsetmc.ui.adapter.item.MarketItem
 
 private fun filter(from: Float, to: Float, filterField: Float?): Boolean {
     if (filterField == null)
@@ -49,9 +31,9 @@ fun setAppropriateFilter(i: Int, from: String, to: String, item: Market): Boolea
     return filter(from.toFloat(), to.toFloat(), findChosenFieldValueInMarket(item, i))
 }
 
-class MarketComparator(var field: Int): Comparator<Market>{
-    override fun compare(o1: Market?, o2: Market?): Int {
-        return (((findChosenFieldValueInMarket(o1!!, field) ?: 0.0f) - (findChosenFieldValueInMarket(o2!!, field) ?: 0.0f)) * 1000.0).toInt()
+class MarketComparator(var field: Int): Comparator<MarketItem>{
+    override fun compare(o1: MarketItem?, o2: MarketItem?): Int {
+        return (((findChosenFieldValueInMarket(o1!!.market, field) ?: 0.0f) - (findChosenFieldValueInMarket(o2!!.market, field) ?: 0.0f)) * 1000.0).toInt()
     }
 
 }
