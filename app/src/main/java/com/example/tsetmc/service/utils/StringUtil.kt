@@ -21,17 +21,17 @@ class StringUtil {
         }
 
         @JvmStatic
-        fun convertEnglishNumberToPersian(number: Int): String{
+        fun convertEnglishNumberToPersian(number: Int?): String{
             return convertEnglishNumberToPersian(number.toString())
         }
 
         @JvmStatic
-        fun convertEnglishNumberToPersian(number: Float): String{
+        fun convertEnglishNumberToPersian(number: Float?): String{
             return convertEnglishNumberToPersian(number.toString())
         }
 
         @JvmStatic
-        fun convertEnglishNumberToPersian(number: Double): String{
+        fun convertEnglishNumberToPersian(number: Double?): String{
             return convertEnglishNumberToPersian(number.toString())
         }
     }

@@ -33,7 +33,7 @@ fun setAppropriateFilter(i: Int, from: String, to: String, item: Market): Boolea
 
 class MarketComparator(var field: Int): Comparator<MarketItem>{
     override fun compare(o1: MarketItem?, o2: MarketItem?): Int {
-        return (((findChosenFieldValueInMarket(o1!!.market, field) ?: 0.0f) - (findChosenFieldValueInMarket(o2!!.market, field) ?: 0.0f)) * 1000.0).toInt()
+        return (((findChosenFieldValueInMarket(o1!!.market, field) ?: Float.MAX_VALUE) - (findChosenFieldValueInMarket(o2!!.market, field) ?: Float.MAX_VALUE)) * 1000.0).toInt()
     }
 
 }
