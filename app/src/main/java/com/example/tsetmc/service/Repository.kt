@@ -26,8 +26,7 @@ class Repository {
                     FileUtil.getListOfSubDirectory(directory)
                 )
             )
-        }
-        )
+        })
         _historyItems.postValue(historyList)
     }
 
@@ -80,12 +79,6 @@ class Repository {
     }
 
     fun deleteData(directory: File){
-        if(directory.isDirectory)
-            for (child in directory.listFiles())
-                deleteData(child)
-        
-        val b = directory.delete()
-        Log.i("isDeleted", b.toString())
-        Log.i("isDeleted", directory.toString())
+        directory.deleteRecursively()
     }
 }

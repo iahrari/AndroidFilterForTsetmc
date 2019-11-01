@@ -29,7 +29,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Spinner
+            <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/spinner_dialog"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
