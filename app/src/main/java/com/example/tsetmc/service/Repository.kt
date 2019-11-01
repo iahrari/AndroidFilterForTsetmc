@@ -73,4 +73,19 @@ class Repository {
 
         return list
     }
+
+    fun deleteFromList(date: Long){
+        historyList.remove(HistoryItem().apply { dateLong = date })
+        _historyItems.value = historyList
+    }
+
+    fun deleteData(directory: File){
+        if(directory.isDirectory)
+            for (child in directory.listFiles())
+                deleteData(child)
+        
+        val b = directory.delete()
+        Log.i("isDeleted", b.toString())
+        Log.i("isDeleted", directory.toString())
+    }
 }

@@ -79,5 +79,10 @@ class FileUtil private constructor(private val url: String, private val destinat
                 File(dir, name).isDirectory
             }
         }
+
+        fun refreshDataFile(url: String, destinationDir: File): File{
+            destinationDir.delete()
+            return parse(url, destinationDir.toString())
+        }
     }
 }

@@ -1,16 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
-        <import type="com.example.tsetmc.service.utils.StringUtil"/>
+        <import type="com.example.tsetmc.service.utils.StringUtil" />
         <variable name="date" type="com.example.tsetmc.service.model.HistoryItem" />
     </data>
 
-    <RadioButton
-        android:id="@+id/history_radio"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layoutDirection="rtl"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="@{StringUtil.convertEnglishNumberToPersian(date.dateString)}"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"/>
+        android:layoutDirection="rtl"
+        android:orientation="horizontal">
+
+        <RadioButton
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/delete_button"
+            android:id="@+id/history_radio"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@{StringUtil.convertEnglishNumberToPersian(date.dateString)}"
+            tools:text="1378/11/12"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
+
+        <ImageButton
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/delete_button"
+            android:layout_gravity="center_vertical|end"
+            android:contentDescription="@string/delete_data"
+            app:srcCompat="@drawable/ic_delete"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -13,4 +13,5 @@
     <string name="submit">اعمال</string>
     <string name="history">تاریخچه</string>
     <string name="refresh">تازه سازی</string>
+    <string name="delete_data">حذف اطلاعات</string>
 </resources>

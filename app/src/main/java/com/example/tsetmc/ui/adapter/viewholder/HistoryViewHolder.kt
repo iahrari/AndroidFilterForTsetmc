@@ -1,6 +1,5 @@
 package com.example.tsetmc.ui.adapter.viewholder
 
-import android.util.Log
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer

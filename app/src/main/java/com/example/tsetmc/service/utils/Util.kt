@@ -1,6 +1,5 @@
 package com.example.tsetmc.service.utils
 
-import android.util.Log
 import com.example.tsetmc.service.model.HistoryItem
 import com.example.tsetmc.service.model.Market
 import com.example.tsetmc.ui.adapter.item.MarketItem
@@ -16,7 +15,6 @@ fun generateDynamicFolderName(): Long{
 
     val convert =
         GregorianCalendar(year, month, day, 4, 8, 7)
-    Log.i("currentTime", (Date().time == convert.time.time).toString())
     return convert.time.time
 }
 

@@ -13,10 +13,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.IllegalArgumentException
+import java.text.FieldPosition
 
 class MainFragmentViewModel(private val context: Context): BaseViewModel() {
     private val _isDataProcessed = MutableLiveData<Boolean>()
-    //private val _adapterUpdated = MutableLiveData<Boolean>()
     private val comparator: MarketComparator = MarketComparator(0)
     private val itemListImpl = ComparableItemListImpl(comparator)
     val itemAdapter = ItemAdapter (itemListImpl)
@@ -25,15 +25,15 @@ class MainFragmentViewModel(private val context: Context): BaseViewModel() {
     val isDataProcessed: LiveData<Boolean> get() = _isDataProcessed
 
     init {
-        repository.historyItem.observeForever {
+        repository.historyItem.observeForever { list ->
             historyItemAdapter.adapterItems.removeAll { true }
-            historyItemAdapter.add(it)
+            historyItemAdapter.add(list)
         }
-        repository.modifyHistoryList(context.externalDataDir(""))
-        retrieveDataByTime(generateDynamicFolderName())
+        repository.modifyHistoryList(context.externalDataDir())
+        retrieveDataByTime()
     }
 
-    fun retrieveDataByTime(date: Long){
+    fun retrieveDataByTime(date: Long = generateDynamicFolderName()){
         scope.launch {
             _isDataProcessed.value = false
             val list = arrayListOf<MarketItem>()
@@ -46,10 +46,10 @@ class MainFragmentViewModel(private val context: Context): BaseViewModel() {
                     )
                 )
             }
-            itemAdapter.adapterItems.removeAll { true }
-            itemAdapter.add(list)
+            itemAdapter.setNewList(list)
+//            itemAdapter.adapterItems.removeAll { true }
+//            itemAdapter.add(list)
             _isDataProcessed.value = true
-            //_adapterUpdated.postValue(true)
         }
     }
 
@@ -66,6 +66,16 @@ class MainFragmentViewModel(private val context: Context): BaseViewModel() {
                     item.market
                 )
         }
+    }
+
+    fun refreshData(){
+        repository.deleteFromList(generateDynamicFolderName())
+        retrieveDataByTime()
+    }
+
+    fun deleteData(date: Long, position: Int){
+        historyItemAdapter.remove(position)
+        repository.deleteData(context.externalDataDir("/$date"))
     }
 
     fun handleItemsSorting(i: Int){

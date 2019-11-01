@@ -1,9 +1,7 @@
 package com.example.tsetmc.ui.view
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.inputmethod.EditorInfo
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -12,6 +10,7 @@ import com.example.tsetmc.R
 import com.example.tsetmc.databinding.*
 import com.example.tsetmc.ui.*
 import com.example.tsetmc.ui.adapter.clickevent.HistoryClickEvent
+import com.example.tsetmc.ui.adapter.clickevent.HistoryDeleteEvent
 import com.example.tsetmc.viewmodel.MainFragmentViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.mikepenz.fastadapter.FastAdapter
@@ -27,12 +26,17 @@ class MainFragment : Fragment() {
     private lateinit var historyDialog: BottomSheetDialog
 
     private lateinit var viewModel: MainFragmentViewModel
-    
+
     private fun setDataBindings(inflater: LayoutInflater, container: ViewGroup?){
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
         hDBinding = DataBindingUtil.inflate(layoutInflater, R.layout.history_dialog, null, false)
         sDBinding = DataBindingUtil.inflate(layoutInflater, R.layout.sort_dialog, null, false)
         dBinding = DataBindingUtil.inflate(layoutInflater, R.layout.filter_dialog, null, false)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -98,6 +102,7 @@ class MainFragment : Fragment() {
     private fun setHistoryBottomSheet() {
         val hAdapter = FastAdapter.with(viewModel.historyItemAdapter)
         hAdapter.addEventHook(HistoryClickEvent(viewModel.historyItemAdapter) {viewModel.retrieveDataByTime(it)})
+        hAdapter.addEventHook(HistoryDeleteEvent{item, position -> viewModel.deleteData(item.dateLong, position) })
         hDBinding.recyclerHistory.adapter = hAdapter
         historyDialog.show()
     }
@@ -110,5 +115,21 @@ class MainFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         binding.fragmentContent.viewModel = viewModel
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_fragment_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.refresh_data -> {
+                viewModel.refreshData()
+                return true
+            }
+        }
+
+        return false
     }
 }
