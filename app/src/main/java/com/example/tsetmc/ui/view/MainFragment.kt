@@ -3,8 +3,10 @@ package com.example.tsetmc.ui.view
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.EditorInfo
+import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.tsetmc.R
 import com.example.tsetmc.databinding.*
@@ -26,6 +28,7 @@ class MainFragment : Fragment() {
 
     private lateinit var viewModel: MainFragmentViewModel
 
+    private lateinit var toolbar: Toolbar
     private fun setDataBindings(inflater: LayoutInflater, container: ViewGroup?){
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
         hDBinding = DataBindingUtil.inflate(layoutInflater, R.layout.history_dialog, null, false)
@@ -49,6 +52,7 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        toolbar = activity!!.findViewById(R.id.toolbar)
         setViewModel()
         setBottomNavigation()
     }
@@ -118,6 +122,7 @@ class MainFragment : Fragment() {
             this,
             MainFragmentViewModel.Factory(context!!.applicationContext)
         ).get(MainFragmentViewModel::class.java)
+        viewModel.lastUpdateLive.observe(this, Observer { toolbar.subtitle = "آخرین آپدیت: $it" })
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         binding.fragmentContent.viewModel = viewModel

@@ -1,5 +1,8 @@
 package com.example.tsetmc.service.utils;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.time.Year;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
@@ -739,7 +742,18 @@ public class JalaliCalendar extends Calendar {
             default:
                 throw new IllegalArgumentException();
         }
+    }
 
+    @NotNull
+    @Override
+    public String toString(){
+        return
+                "" + get(YEAR) +
+                        "/" + (get(MONTH) + 1) +
+                        "/" + get(DAY_OF_MONTH) +
+                        " " + get(HOUR_OF_DAY) +
+                        ":" + get(MINUTE) +
+                        ":" + get(SECOND);
     }
 
     @Override

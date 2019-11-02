@@ -30,7 +30,7 @@ class Repository {
         _historyItems.postValue(historyList)
     }
 
-    suspend fun retrieveMarketDataList(directory: File): MutableList<MarketItem> {
+    suspend fun retrieveMarketDataList(directory: File, shareLastUpdate: SharedPreferencesUtil): MutableList<MarketItem> {
         val list: MutableList<MarketItem> = ArrayList()
         var dataIsAvailable = false
         val dLong = generateDynamicFolderName()
@@ -58,7 +58,7 @@ class Repository {
                         dateLong = generateDynamicFolderName()
                         setIsSelected(true, 0)
                     })
-
+                    shareLastUpdate.lastUpdate = JalaliCalendar().toString()
                     _historyItems.postValue(historyList)
                 }
             }

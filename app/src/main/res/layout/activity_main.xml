@@ -15,7 +15,7 @@
             app:title="@string/app_name"
             android:id="@+id/toolbar"
             app:titleTextColor="@android:color/white"
-            android:layout_height="?attr/actionBarSize"/>
+            android:layout_height="wrap_content"/>
     </com.google.android.material.appbar.AppBarLayout>
     <include layout="@layout/content_main_activity"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

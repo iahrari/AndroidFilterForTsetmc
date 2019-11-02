@@ -1,7 +1,5 @@
 package com.example.tsetmc.ui
 
-import android.widget.ArrayAdapter
-import android.widget.Spinner
 import com.example.tsetmc.service.model.Market
 import com.example.tsetmc.ui.adapter.item.MarketItem
 

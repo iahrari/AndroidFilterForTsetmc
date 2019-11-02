@@ -3,6 +3,7 @@ import android.content.Context
 import androidx.lifecycle.*
 import com.example.tsetmc.service.externalDataDir
 import com.example.tsetmc.service.model.HistoryItem
+import com.example.tsetmc.service.utils.SharedPreferencesUtil
 import com.example.tsetmc.ui.adapter.item.MarketItem
 import com.example.tsetmc.service.utils.generateDynamicFolderName
 import com.example.tsetmc.ui.MarketComparator
@@ -19,6 +20,8 @@ class MainFragmentViewModel(private val context: Context): BaseViewModel() {
     private val _isDataProcessed = MutableLiveData<Boolean>()
     private val comparator: MarketComparator = MarketComparator(0)
     private val itemListImpl = ComparableItemListImpl(comparator)
+    private val sharedPreferencesUtil = SharedPreferencesUtil(context)
+    val lastUpdateLive = sharedPreferencesUtil.observableLastUpdate
     val itemAdapter = ItemAdapter (itemListImpl)
     val historyItemAdapter = ItemAdapter<HistoryItem>()
 
@@ -42,7 +45,7 @@ class MainFragmentViewModel(private val context: Context): BaseViewModel() {
                     repository.retrieveMarketDataList(
                         context.externalDataDir(
                             "/$date"
-                        )
+                        ), sharedPreferencesUtil
                     )
                 )
             }
