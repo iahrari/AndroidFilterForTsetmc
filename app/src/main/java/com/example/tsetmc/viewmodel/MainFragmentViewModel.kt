@@ -53,16 +53,17 @@ class MainFragmentViewModel(private val context: Context): BaseViewModel() {
         }
     }
 
-    fun handleItemsFiltering(i: Int, from: String, to: String, isThereAnyKindOfError: Boolean){
+    fun handleItemsFiltering(i: Int, from: String, to: String){
+        val toFilter = if (to == "") from else to
         itemAdapter.filter(from)
         itemAdapter.itemFilter.filterPredicate = { item, char ->
-            if (char == "" || char == null || isThereAnyKindOfError)
+            if (char == "" || char == null)
                 true
             else
                 setAppropriateFilter(
                     i,
                     char.toString(),
-                    to,
+                    toFilter,
                     item.market
                 )
         }

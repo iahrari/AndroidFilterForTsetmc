@@ -1,78 +1,320 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.example.tsetmc.service.utils.StringUtil"/>
+
+        <import type="com.example.tsetmc.service.utils.StringUtil" />
+
         <variable
-            name="market" type="com.example.tsetmc.service.model.Market" />
+            name="market"
+            type="com.example.tsetmc.service.model.Market" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
+        android:background="@drawable/card_background"
         android:paddingTop="4dp"
         android:paddingBottom="4dp">
 
-        <LinearLayout
+        <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:weightSum="4">
+            android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/symbol"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-                android:text="@{StringUtil.convertEnglishNumberToPersian(market.symbol)}"
-                tools:text="ضماد" />
+                android:orientation="vertical"
+                android:weightSum="2">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/last_transaction_percent"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="4dp"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-                android:layout_weight="1"
-                android:layoutDirection="ltr"
-                android:gravity="center"
-                android:text="@{StringUtil.convertEnglishNumberToPersian(market.lastTransactionPercent)}"
-                tools:text="2.3%" />
+                <LinearLayout
+                    android:id="@+id/title_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="4dp"
+                    android:background="@color/md_white_1000"
+                    android:orientation="horizontal"
+                    android:weightSum="12"
+                    android:layout_weight="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/eps"
-                android:layout_width="0dp"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:layoutDirection="ltr"
-                android:gravity="center"
-                android:text="@{StringUtil.convertEnglishNumberToPersian(market.eps)}"
-                tools:text="3699" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/symbol"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/last_price_value"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:layoutDirection="ltr"
-                android:gravity="center"
-                android:text="@{StringUtil.convertEnglishNumberToPersian(market.lastPriceValue)}"
-                tools:text="426322" />
-        </LinearLayout>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/last_transaction_percent"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/last_price_value"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/last_price_percent"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/eps"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/p_e"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/buyNo"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/buyVolume"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/buy_price"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/sell_price"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/sell_volume"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/sell_no"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="4dp"
+                    android:orientation="horizontal"
+                    android:weightSum="12">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/symbol"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{StringUtil.convertEnglishNumberToPersian(market.symbol)}"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                        tools:text="ضماد" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/last_price_value"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layoutDirection="ltr"
+                        android:text="@{StringUtil.convertEnglishNumberToPersian(market.lastPriceValue)}"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                        tools:text="426322" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/last_price_percent"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{StringUtil.convertEnglishNumberToPersian(market.lastPricePercent)}"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                        tools:text="ضماد"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/last_transaction_percent"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layoutDirection="ltr"
+                        android:text="@{StringUtil.convertEnglishNumberToPersian(market.lastTransactionPercent)}"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                        tools:text="2.3%" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/eps"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layoutDirection="ltr"
+                        android:text="@{StringUtil.convertEnglishNumberToPersian(market.eps)}"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                        tools:text="3699" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{StringUtil.convertEnglishNumberToPersian(market.p_e)}"
+                        android:id="@+id/p_e"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{StringUtil.convertEnglishNumberToPersian(market.buyNo)}"
+                        android:id="@+id/buyNo"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{StringUtil.convertEnglishNumberToPersian(market.buyVolume)}"
+                        android:id="@+id/buyVolume"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{StringUtil.convertEnglishNumberToPersian(market.buyPrice)}"
+                        android:id="@+id/buyPrice"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{StringUtil.convertEnglishNumberToPersian(market.sellPrice)}"
+                        android:id="@+id/sell_price"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{StringUtil.convertEnglishNumberToPersian(market.sellVolume)}"
+                        android:id="@+id/sellVolume"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@{StringUtil.convertEnglishNumberToPersian(market.sellNo)}"
+                        android:id="@+id/sell_no"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                </LinearLayout>
+            </LinearLayout>
+        </HorizontalScrollView>
     </com.google.android.material.card.MaterialCardView>
 </layout>

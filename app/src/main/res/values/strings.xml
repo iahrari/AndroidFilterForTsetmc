@@ -14,4 +14,13 @@
     <string name="history">تاریخچه</string>
     <string name="refresh">تازه سازی</string>
     <string name="delete_data">حذف اطلاعات</string>
+    <string name="lastPriceValue">آحرین قیمت مقدار</string>
+    <string name="last_price_percent">آخرین قیمت درصد</string>
+    <string name="p_e">P/E</string>
+    <string name="buyVolume">خرید حجم</string>
+    <string name="buy_price">خرید قیمت</string>
+    <string name="buyNo">خرید تعداد</string>
+    <string name="sell_price">فروش قیمت</string>
+    <string name="sell_volume">فروش حجم</string>
+    <string name="sell_no">فروش تعداد</string>
 </resources>

@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.tsetmc.R
 import com.example.tsetmc.databinding.*
-import com.example.tsetmc.ui.*
 import com.example.tsetmc.ui.adapter.clickevent.HistoryClickEvent
 import com.example.tsetmc.ui.adapter.clickevent.HistoryDeleteEvent
 import com.example.tsetmc.viewmodel.MainFragmentViewModel
@@ -75,19 +74,26 @@ class MainFragment : Fragment() {
 
     private fun setFilterBottomSheet() {
         dBinding.apply {
+            fun setFilter(){
+                viewModel.handleItemsFiltering(
+                    spinnerDialog.selectedItemPosition,
+                    fromEditText.text.toString(),
+                    toEditText.text.toString()
+                )
+                filterDialog.dismiss()
+            }
             toEditText.setOnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    viewModel.handleItemsFiltering(
-                        spinnerDialog.selectedItemPosition,
-                        fromEditText.text.toString(),
-                        toEditText.text.toString(),
-                        toEditText.isThereAnyKindOfError()
-                    )
-                    filterDialog.dismiss()
+                    setFilter()
                     true
                 } else false
             }
+
+            filterSubmit.setOnClickListener {
+                setFilter()
+            }
         }
+
         filterDialog.show()
     }
 

@@ -1,6 +1,7 @@
 package com.example.tsetmc.ui.adapter.viewholder
 
 import android.view.View
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.databinding.DataBindingUtil
 import com.example.tsetmc.R
 import com.example.tsetmc.databinding.MarketItemBinding
@@ -16,6 +17,9 @@ class MainListViewHolder(view: View): FastAdapter.ViewHolder<MarketItem>(view) {
 
     override fun bindView(item: MarketItem, payloads: MutableList<Any>) {
         binding?.market = item.market
+        binding?.lastPriceValue!!.compoundDrawables[0]
+
+
     }
 
     companion object {

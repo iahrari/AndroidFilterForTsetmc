@@ -13,59 +13,6 @@
         android:layout_height="match_parent"
         android:layoutDirection="rtl">
 
-        <LinearLayout
-            android:id="@+id/title_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:background="@color/md_white_1000"
-            android:orientation="horizontal"
-            android:weightSum="4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/symbol"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/last_transaction_percent"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/eps"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/last_price_value"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-        </LinearLayout>
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_main_list"
             android:layout_width="match_parent"
@@ -75,7 +22,7 @@
             app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_container"
+            app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/market_item" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView

@@ -45,7 +45,7 @@ dependencies {
 
     implementation "com.mikepenz:fastadapter:$fastAdapterVersion"
     implementation "com.mikepenz:fastadapter-extensions-ui:$fastAdapterVersion"
-    implementation "com.mikepenz:fastadapter-extensions-utils:$fastAdapterVersion"
+    implementation "com.mikepenz:fastadapter-extensions-expandable:$fastAdapterVersion"
 
     implementation "androidx.lifecycle:lifecycle-extensions:$androidx_version"
     kapt "androidx.lifecycle:lifecycle-compiler:$androidx_version"
