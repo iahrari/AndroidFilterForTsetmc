@@ -1,4 +1,5 @@
 package com.example.tsetmc.viewmodel
+
 import android.content.Context
 import androidx.lifecycle.*
 import com.example.tsetmc.service.externalDataDir
@@ -14,7 +15,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.IllegalArgumentException
-import java.text.FieldPosition
 
 class MainFragmentViewModel(private val context: Context): BaseViewModel() {
     private val _isDataProcessed = MutableLiveData<Boolean>()
@@ -50,8 +50,6 @@ class MainFragmentViewModel(private val context: Context): BaseViewModel() {
                 )
             }
             itemAdapter.setNewList(list)
-//            itemAdapter.adapterItems.removeAll { true }
-//            itemAdapter.add(list)
             _isDataProcessed.value = true
         }
     }

@@ -4,41 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="com.example.tsetmc.service.utils.StringUtil" />
-
-        <variable
-            name="market"
-            type="com.example.tsetmc.service.model.Market" />
+        <variable name="market" type="com.example.tsetmc.service.model.Market" />
     </data>
 
-    <com.google.android.material.card.MaterialCardView
+    <HorizontalScrollView
+        android:id="@+id/market_item_scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:background="@drawable/card_background"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp">
+        android:layoutDirection="rtl"
+        android:layout_margin="4dp">
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:weightSum="2">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/title_container"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="4dp"
+                    android:layout_weight="1"
                     android:background="@color/md_white_1000"
                     android:orientation="horizontal"
                     android:weightSum="12"
-                    android:layout_weight="1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -81,7 +77,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="@string/last_price_percent"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"/>
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="0dp"
@@ -166,9 +162,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:layout_weight="1"
                     android:layout_marginBottom="4dp"
                     android:orientation="horizontal"
                     android:weightSum="12">
@@ -184,6 +179,19 @@
                         android:text="@{StringUtil.convertEnglishNumberToPersian(market.symbol)}"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                         tools:text="ضماد" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/last_transaction_percent"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layoutDirection="ltr"
+                        android:text="@{StringUtil.convertEnglishNumberToPersian(market.lastTransactionPercent)}"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                        tools:text="2.3%" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/last_price_value"
@@ -206,22 +214,10 @@
                         android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="center"
+                        android:layoutDirection="ltr"
                         android:text="@{StringUtil.convertEnglishNumberToPersian(market.lastPricePercent)}"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-                        tools:text="ضماد"/>
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/last_transaction_percent"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_margin="4dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:layoutDirection="ltr"
-                        android:text="@{StringUtil.convertEnglishNumberToPersian(market.lastTransactionPercent)}"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-                        tools:text="2.3%" />
+                        tools:text="ضماد" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/eps"
@@ -238,50 +234,55 @@
 
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_margin="4dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="@{StringUtil.convertEnglishNumberToPersian(market.p_e)}"
                         android:id="@+id/p_e"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@{StringUtil.convertEnglishNumberToPersian(market.buyNo)}"
+                        android:layoutDirection="ltr"
+                        android:text="@{StringUtil.convertEnglishNumberToPersian(market.p_e)}"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/buyNo"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@{StringUtil.convertEnglishNumberToPersian(market.buyVolume)}"
+                        android:layoutDirection="ltr"
+                        android:text="@{StringUtil.convertEnglishNumberToPersian(market.buyNo)}"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/buyVolume"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@{StringUtil.convertEnglishNumberToPersian(market.buyPrice)}"
-                        android:id="@+id/buyPrice"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                        android:layoutDirection="ltr"
+                        android:text="@{StringUtil.convertEnglishNumberToPersian(market.buyVolume)}"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/buyPrice"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layoutDirection="ltr"
+                        android:text="@{StringUtil.convertEnglishNumberToPersian(market.buyPrice)}"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/sell_price"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -289,32 +290,33 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="@{StringUtil.convertEnglishNumberToPersian(market.sellPrice)}"
-                        android:id="@+id/sell_price"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_margin="4dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="@{StringUtil.convertEnglishNumberToPersian(market.sellVolume)}"
                         android:id="@+id/sellVolume"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@{StringUtil.convertEnglishNumberToPersian(market.sellNo)}"
+                        android:layoutDirection="ltr"
+                        android:text="@{StringUtil.convertEnglishNumberToPersian(market.sellVolume)}"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/sell_no"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layoutDirection="ltr"
+                        android:text="@{StringUtil.convertEnglishNumberToPersian(market.sellNo)}"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
                 </LinearLayout>
             </LinearLayout>
-        </HorizontalScrollView>
-    </com.google.android.material.card.MaterialCardView>
+        </com.google.android.material.card.MaterialCardView>
+    </HorizontalScrollView>
 </layout>

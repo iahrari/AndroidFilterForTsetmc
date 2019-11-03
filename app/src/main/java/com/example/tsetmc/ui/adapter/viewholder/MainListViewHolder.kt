@@ -1,7 +1,7 @@
 package com.example.tsetmc.ui.adapter.viewholder
 
 import android.view.View
-import androidx.core.graphics.drawable.DrawableCompat
+import android.widget.ScrollView
 import androidx.databinding.DataBindingUtil
 import com.example.tsetmc.R
 import com.example.tsetmc.databinding.MarketItemBinding
@@ -12,14 +12,20 @@ class MainListViewHolder(view: View): FastAdapter.ViewHolder<MarketItem>(view) {
     private var binding: MarketItemBinding? = DataBindingUtil.bind(view)
 
     override fun unbindView(item: MarketItem) {
+
         binding?.market = null
     }
 
     override fun bindView(item: MarketItem, payloads: MutableList<Any>) {
+
+        binding?.marketItemScroll?.post {
+            binding?.marketItemScroll?.fullScroll(ScrollView.FOCUS_RIGHT)
+        }
+
         binding?.market = item.market
-        binding?.lastPriceValue!!.compoundDrawables[0]
-
-
+        
+        binding?.root?.invalidate()
+        binding?.root?.requestLayout()
     }
 
     companion object {
