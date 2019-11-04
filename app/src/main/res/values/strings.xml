@@ -23,4 +23,8 @@
     <string name="sell_price">فروش قیمت</string>
     <string name="sell_volume">فروش حجم</string>
     <string name="sell_no">فروش تعداد</string>
+    <string name="about_us">درباره ما</string>
+    <string name="project_manager">مدیر پروژه: علی عبدالهی</string>
+    <string name="programmer_iahrari">برنامه نویس: ایمان احرای</string>
+    <string name="github_repository">GitHub repository: https://github.com/iahrari/AndroidFilterForTsetmc</string>
 </resources>

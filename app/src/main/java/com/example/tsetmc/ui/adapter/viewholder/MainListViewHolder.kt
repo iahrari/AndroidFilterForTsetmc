@@ -23,7 +23,7 @@ class MainListViewHolder(view: View): FastAdapter.ViewHolder<MarketItem>(view) {
         }
 
         binding?.market = item.market
-        
+
         binding?.root?.invalidate()
         binding?.root?.requestLayout()
     }

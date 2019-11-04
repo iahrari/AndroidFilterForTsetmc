@@ -43,6 +43,7 @@ class MainFragmentViewModel(private val context: Context): BaseViewModel() {
             withContext(Dispatchers.Default) {
                 list.addAll(
                     repository.retrieveMarketDataList(
+                        date,
                         context.externalDataDir(
                             "/$date"
                         ), sharedPreferencesUtil

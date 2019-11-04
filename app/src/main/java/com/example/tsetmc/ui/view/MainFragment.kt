@@ -139,8 +139,18 @@ class MainFragment : Fragment() {
                 viewModel.refreshData()
                 return true
             }
+            R.id.about_menu -> {
+                setAboutUsDialog()
+                return true
+            }
         }
 
         return false
+    }
+
+    private fun setAboutUsDialog(){
+        val dialog = BottomSheetDialog(context!!)
+        dialog.setContentView(R.layout.about_us_dialog)
+        dialog.show()
     }
 }

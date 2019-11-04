@@ -8,6 +8,7 @@ import com.example.tsetmc.service.utils.*
 import com.example.tsetmc.ui.adapter.item.MarketItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.xmlpull.v1.XmlPullParserException
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.IOException
@@ -30,7 +31,7 @@ class Repository {
         _historyItems.postValue(historyList)
     }
 
-    suspend fun retrieveMarketDataList(directory: File, shareLastUpdate: SharedPreferencesUtil): MutableList<MarketItem> {
+    suspend fun retrieveMarketDataList(date: Long, directory: File, shareLastUpdate: SharedPreferencesUtil): MutableList<MarketItem> {
         val list: MutableList<MarketItem> = ArrayList()
         var dataIsAvailable = false
         val dLong = generateDynamicFolderName()
@@ -68,6 +69,10 @@ class Repository {
             Log.e("RetrievingData", e.message)
         } catch (e: MalformedURLException) {
             Log.e("RetrievingData", e.message)
+        } catch (e: XmlPullParserException){
+            deleteFromList(date)
+            deleteData(directory)
+            retrieveMarketDataList(date, directory, shareLastUpdate)
         }
 
         return list
@@ -75,7 +80,7 @@ class Repository {
 
     fun deleteFromList(date: Long){
         historyList.remove(HistoryItem().apply { dateLong = date })
-        _historyItems.value = historyList
+        _historyItems.postValue(historyList)
     }
 
     fun deleteData(directory: File){
