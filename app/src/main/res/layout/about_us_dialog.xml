@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,6 +30,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/github_repository"
+        android:autoLink="web"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_margin="16dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/logo_resource"
         android:autoLink="web"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_margin="16dp"/>
