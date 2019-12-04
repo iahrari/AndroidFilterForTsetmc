@@ -74,7 +74,8 @@ class FileUtil private constructor(private val url: String, private val destinat
             return FileUtil(url, destinationDir).downloadFile()
         }
 
-        fun getListOfSubDirectory(directory: File): Array<String> {
+        fun getListOfSubDirectory(directory: File): Array<String>? {
+            //directory.mkdir()
             return directory.list { dir, name ->
                 File(dir, name).isDirectory
             }

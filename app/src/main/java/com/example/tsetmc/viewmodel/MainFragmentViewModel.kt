@@ -28,6 +28,8 @@ class MainFragmentViewModel(private val context: Context): BaseViewModel() {
     val isDataProcessed: LiveData<Boolean> get() = _isDataProcessed
 
     init {
+//        context.externalDataDir("/dat")
+
         repository.historyItem.observeForever { list ->
             historyItemAdapter.adapterItems.removeAll { true }
             historyItemAdapter.add(list)
@@ -45,7 +47,7 @@ class MainFragmentViewModel(private val context: Context): BaseViewModel() {
                     repository.retrieveMarketDataList(
                         date,
                         context.externalDataDir(
-                            "/$date"
+                            date.toString()
                         ), sharedPreferencesUtil
                     )
                 )

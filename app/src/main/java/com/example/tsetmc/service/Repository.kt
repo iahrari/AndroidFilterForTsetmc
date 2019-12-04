@@ -22,11 +22,13 @@ class Repository {
 
     fun modifyHistoryList(directory: File){
         historyList.addAll(ArrayList<HistoryItem>().apply {
-            addAll(
-                getLongArrayOfDataSubDirectoriesSorted(
-                    FileUtil.getListOfSubDirectory(directory)
+            val listH = FileUtil.getListOfSubDirectory(directory)
+            if (listH != null)
+                addAll(
+                    getLongArrayOfDataSubDirectoriesSorted(
+                        listH
+                    )
                 )
-            )
         })
         _historyItems.postValue(historyList)
     }
@@ -66,6 +68,7 @@ class Repository {
         } catch (e: IOException) {
             Log.e("RetrievingData", e.message)
         } catch (e: FileNotFoundException) {
+
             Log.e("RetrievingData", e.message)
         } catch (e: MalformedURLException) {
             Log.e("RetrievingData", e.message)

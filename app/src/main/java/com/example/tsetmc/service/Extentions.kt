@@ -5,7 +5,11 @@ import android.os.Environment
 import java.io.File
 
 fun Context.externalDataDir(subDirectory: String = ""): File{
-    return File(Environment.getExternalStorageDirectory().toString(), "Android/data/$packageName/data$subDirectory")
+    val directory = File(getExternalFilesDir(null), "data")
+    if (!directory.exists())
+        directory.mkdir()
+
+    return File(directory, subDirectory)
 }
 
 fun dataDownloadLink(): String{
