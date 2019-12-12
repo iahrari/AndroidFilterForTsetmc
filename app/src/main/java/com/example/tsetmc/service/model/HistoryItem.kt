@@ -15,7 +15,7 @@ data class HistoryItem(var dateString: String = ""): AbstractItem<HistoryViewHol
     override var isSelected: Boolean = false
 
 
-    fun setIsSelected(value: Boolean, i: Int){
+    fun setIsSelected(value: Boolean, @Suppress("UNUSED_PARAMETER") i: Int){
         _liveIsSelected.postValue(value)
         isSelected = value
     }

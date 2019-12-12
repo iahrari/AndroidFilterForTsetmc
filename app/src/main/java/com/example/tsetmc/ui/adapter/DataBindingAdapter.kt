@@ -15,7 +15,7 @@ object DataBindingAdapter {
 
     @JvmStatic
     @BindingAdapter("setSpinnerAdapter")
-    fun setSpinner(spinner: Spinner, dummyData: Boolean){
+    fun setSpinner(spinner: Spinner, @Suppress("UNUSED_PARAMETER") dummyData: Boolean){
         val array = arrayListOf(
             "آخرین معامله - درصد",
             "آخرین قیمت مقدار",

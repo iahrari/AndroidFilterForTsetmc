@@ -28,4 +28,6 @@
     <string name="programmer_iahrari">برنامه نویس: ایمان احرای</string>
     <string name="github_repository">GitHub repository: https://github.com/iahrari/AndroidFilterForTsetmc</string>
     <string name="logo_resource">منبع لوگو: https://www.freepik.com/free-photos-vectors/business</string>
+    <string name="ascending">صعودی</string>
+    <string name="descending">نزولی</string>
 </resources>

@@ -27,8 +27,8 @@ class MainFragment : Fragment() {
     private lateinit var historyDialog: BottomSheetDialog
 
     private lateinit var viewModel: MainFragmentViewModel
-
     private lateinit var toolbar: Toolbar
+
     private fun setDataBindings(inflater: LayoutInflater, container: ViewGroup?){
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
         hDBinding = DataBindingUtil.inflate(layoutInflater, R.layout.history_dialog, null, false)
@@ -125,6 +125,7 @@ class MainFragment : Fragment() {
         viewModel.lastUpdateLive.observe(this, Observer { toolbar.subtitle = "آخرین آپدیت: $it" })
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        sDBinding.sortComponent = viewModel
         binding.fragmentContent.viewModel = viewModel
     }
 

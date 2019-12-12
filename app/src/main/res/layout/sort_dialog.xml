@@ -6,6 +6,11 @@
     app:behavior_hideable="true"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
+    <data>
+        <variable name="sortComponent" type="com.example.tsetmc.viewmodel.SortingComponent" />
+        <import type="androidx.appcompat.widget.AppCompatRadioButton"/>
+    </data>
+
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,13 +44,45 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/sort_title"/>
 
+            <RadioGroup
+                android:layout_width="0dp"
+                android:layout_margin="16dp"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_sort_dialog"
+                android:id="@+id/sorting_radio_group"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:padding="4dp"
+                    android:onClick="@{(view) -> sortComponent.setSortingMethod(((AppCompatRadioButton)view).isChecked())}"
+                    android:id="@+id/ascending"
+                    android:layout_weight="1"
+                    android:text="@string/ascending"/>
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:id="@+id/descending"
+                    android:padding="4dp"
+                    android:onClick="@{(view) -> sortComponent.setSortingMethod(!((AppCompatRadioButton) view).isChecked())}"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:text="@string/descending"/>
+            </RadioGroup>
+
             <com.google.android.material.button.MaterialButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/submit_sorting"
                 android:layout_margin="16dp"
                 android:text="@string/submit"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_sort_dialog"
+                app:layout_constraintTop_toBottomOf="@+id/sorting_radio_group"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,8 +30,12 @@ fun setAppropriateFilter(i: Int, from: String, to: String, item: Market): Boolea
 }
 
 class MarketComparator(var field: Int): Comparator<MarketItem>{
+    var sortingMethod = SortingMethod.Ascending
     override fun compare(o1: MarketItem?, o2: MarketItem?): Int {
-        return (((findChosenFieldValueInMarket(o1!!.market, field) ?: Float.MAX_VALUE) - (findChosenFieldValueInMarket(o2!!.market, field) ?: Float.MAX_VALUE)) * 1000.0).toInt()
+        return sortingMethod.method * (findChosenFieldValueInMarket(o1!!.market, field) ?: sortingMethod.method * Float.MAX_VALUE).compareTo((findChosenFieldValueInMarket(o2!!.market, field) ?: sortingMethod.method * Float.MAX_VALUE))
     }
 
+    enum class SortingMethod(val method: Int){
+        Ascending(1), Descending(-1)
+    }
 }
