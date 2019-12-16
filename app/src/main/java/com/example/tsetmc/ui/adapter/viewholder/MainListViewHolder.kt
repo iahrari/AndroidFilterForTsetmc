@@ -10,22 +10,13 @@ import com.mikepenz.fastadapter.FastAdapter
 
 class MainListViewHolder(view: View): FastAdapter.ViewHolder<MarketItem>(view) {
     private var binding: MarketItemBinding? = DataBindingUtil.bind(view)
-
-    override fun unbindView(item: MarketItem) {
-
-        binding?.market = null
-    }
+    override fun unbindView(item: MarketItem) {}
 
     override fun bindView(item: MarketItem, payloads: MutableList<Any>) {
-
+        binding?.market = item.market
         binding?.marketItemScroll?.post {
             binding?.marketItemScroll?.fullScroll(ScrollView.FOCUS_RIGHT)
         }
-
-        binding?.market = item.market
-
-        binding?.root?.invalidate()
-        binding?.root?.requestLayout()
     }
 
     companion object {

@@ -1,7 +1,6 @@
 package com.example.tsetmc.viewmodel
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.tsetmc.service.externalDataDir
 import com.example.tsetmc.service.model.HistoryItem
@@ -18,22 +17,6 @@ import kotlinx.coroutines.withContext
 import java.lang.IllegalArgumentException
 
 class MainFragmentViewModel(private val context: Context): BaseViewModel(), SortingComponent {
-    override fun setSortingMethod(isAscending: Boolean) {
-        Log.i("Sorting", isAscending.toString())
-        if (isAscending)
-            comparator.sortingMethod = MarketComparator.SortingMethod.Ascending
-        else
-            comparator.sortingMethod = MarketComparator.SortingMethod.Descending
-    }
-
-//    override fun setAscendingSort() {
-//        comparator.sortingMethod = MarketComparator.SortingMethod.Ascending
-//    }
-//
-//    override fun setDescendingSort() {
-//        comparator.sortingMethod = MarketComparator.SortingMethod.Descending
-//    }
-
     private val _isDataProcessed = MutableLiveData<Boolean>()
     private val comparator: MarketComparator = MarketComparator(0)
     private val itemListImpl = ComparableItemListImpl(comparator)
@@ -101,6 +84,12 @@ class MainFragmentViewModel(private val context: Context): BaseViewModel(), Sort
     override fun handleItemsSorting(i: Int){
         comparator.field = i
         itemListImpl.withComparator(comparator)
+    }
+
+    override fun setSortingMethod(isAscending: Boolean) {
+        comparator.sortingMethod =
+            if (isAscending) MarketComparator.SortingMethod.Ascending
+            else MarketComparator.SortingMethod.Descending
     }
 
     class Factory(private val context: Context): ViewModelProvider.Factory{
